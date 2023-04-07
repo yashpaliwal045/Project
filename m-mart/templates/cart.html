@@ -1,0 +1,156 @@
+{% extends 'index.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    {% block title %}<title>Cart</title>{% endblock %}
+</head>
+<body>
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-lg-8 p-3 bg-white rounded shadow-sm mb-8">
+
+                <!-- Shopping cart table -->
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col" class="border-0 bg-light">
+                                <div class="p-2 px-2 text-uppercase">Product</div>
+                            </th>
+                            <th scope="col" class="border-0 bg-light">
+                                <div class="py-2 text-uppercase">Price</div>
+                            </th>
+                            <th scope="col" class="border-0 bg-light">
+                                <div class="py-2 text-uppercase">Size</div>
+                            </th>
+                            <th scope="col" class="border-0 bg-light">
+                                <div class="py-2 px-3 text-uppercase">Quantity</div>
+                            </th>
+                            <th scope="col" class="border-0 bg-light">
+                                <div class="py-2 text-uppercase">Remove</div>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for i in Data %}
+                            <tr>
+                                <th scope="row" class="border-0">
+                                    <div class="p-3">
+                                        <img src="{{ i.cart_product.img1.url }}"
+                                             alt="" width="70" class="img-fluid rounded shadow-sm">
+                                        <div class="ml-1 d-inline-block align-middle"
+                                             style="width: 58%; white-space: nowrap;overflow : hidden;text-overflow: ellipsis;resize: horizontal">
+                                            <h5 class="mb-0"><a href="#" class="text-dark d-inline-block align-middle"
+                                            >
+                                                {{ i.cart_product.name }}</a></h5>
+                                        </div>
+                                    </div>
+                                </th>
+                                <td class="border-0 align-middle"><strong>&#8377;{{ i.cart_product.price }}</strong>
+                                </td>
+                                <td class="border-0 align-middle" style="text-align: center">
+                                    <strong>{{ i.cart_product.size }}</strong>
+                                </td>
+                                <td class="border-0 align-middle">
+                                    <div class="qtydiv">
+                                            <div class="qtybox">
+                                                <strong><a href="/cartedit1/{{ i.cart_product.id }}/">
+                                                    <span class="btnqty qtyminus icon ui-icon-minus"
+                                                          style="color: black">- </span></a>
+                                                    <input type="text" id="quantity" name="count" value="{{ i.count }}"
+                                                       min="1" class="quantity-selector quantity-input">
+                                                    <a  href="/cartedit/{{ i.cart_product.id }}/">
+                                                        <span class="btnqty qtyplus icon ui-icon-plus"
+                                                      style="color: black">+ </span></a>
+                                                    </a>
+                                                </strong>
+                                            </div>
+                                        </div>
+                                </td>
+                                <td class="border-0 align-middle"><a href="/cartdelete/{{ i.cart_product.id }}/"
+                                                                     class="text-dark"><i
+                                        class="fa fa-trash"></i></a></td>
+                            </tr>
+
+                            <!--<tr>
+                                <th scope="row">
+                                    <div class="p-2">
+                                        <img src="https://res.cloudinary.com/mhmd/image/upload/v1556670479/product-2_qxjis2.jpg"
+                                             alt="" width="70" class="img-fluid rounded shadow-sm">
+                                        <div class="ml-3 d-inline-block align-middle">
+                                            <h5 class="mb-0"><a href="#" class="text-dark d-inline-block">Gray Nike
+                                                running shoe</a></h5><span
+                                                class="text-muted font-weight-normal font-italic">Category: Fashion</span>
+                                        </div>
+                                    </div>
+                                <td class="align-middle"><strong>$79.00</strong></td>
+                                <td class="align-middle"><strong>3</strong></td>
+                                <td class="align-middle"><a href="#" class="text-dark"><i
+                                        class="fa fa-trash"></i></a>
+                                </td>
+                            </tr>-->
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- End -->
+            </div>
+
+
+            <!-- <div class="col-lg-6">
+                 <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Coupon code</div>
+                 <div class="p-4">
+                     <p class="font-italic mb-4">If you have a coupon code, please enter it in the box below</p>
+                     <div class="input-group mb-4 border rounded-pill p-2">
+                         <input type="text" placeholder="Apply coupon" aria-describedby="button-addon3"
+                                class="form-control border-0">
+                         <div class="input-group-append border-0">
+                             <button id="button-addon3" type="button" class="btn btn-dark px-4 rounded-pill"><i
+                                     class="fa fa-gift mr-2"></i>Apply coupon
+                             </button>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Instructions for
+                     seller
+                 </div>
+                 <div class="p-4">
+                     <p class="font-italic mb-4">If you have some information for the seller you can leave them
+                         in the box below</p>
+                     <textarea name="" cols="30" rows="2" class="form-control"></textarea>
+                 </div>
+             </div>-->
+            {% if  length  != 0 %}
+            <div class="col-lg-4">
+                <div class="py-3 p-3 bg-white rounded shadow-sm">
+                    <div class="bg-light px-4 py-3 text-uppercase font-weight-bold">Order summary</div>
+                    <div class="p-4">
+                        <p class="font-italic mb-4">Shipping and additional costs are calculated based on values you
+                            have entered.</p>
+                        <ul class="list-unstyled mb-4">
+                            <li class="d-flex justify-content-between py-3 border-bottom"><strong
+                                    class="text-muted">Order Subtotal </strong><strong>&#8377;{{ Total }}</strong></li>
+                            <li class="d-flex justify-content-between py-3 border-bottom"><strong
+                                    class="text-muted">Shipping and handling</strong><strong>Free</strong></li>
+                            <li class="d-flex justify-content-between py-3 border-bottom"><strong
+                                    class="text-muted">Total</strong>
+                                <h5 class="font-weight-bold">&#8377;{{ Total }}</h5>
+                            </li>
+                        </ul>
+                        <a href="/selectaddress/" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to
+                            checkout</a>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    </body>
+    <!-- ##### Main Content Wrapper End ##### -->
+{% endblock %}
+
+</html>

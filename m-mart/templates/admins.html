@@ -1,0 +1,102 @@
+{% extends 'index.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+{% block body %}
+    <div class="container-fluid" style="margin-top: 18vh">
+        <div class="row">
+            <div class="container-fluid">
+                <div class="row offset-1">
+                    <div class="col-sm-2 py-1">
+                        <a href="/addproduct/" class="btn btn-dark rounded-pill py-2 btn-block" style="font-size: 20px">Add
+                            Product</a>
+                    </div>
+                    <div class="col-sm-2 py-1">
+                        <a href="/addcategory/" class="btn btn-dark rounded-pill py-2 btn-block"
+                           style="font-size: 20px">Add Category</a>
+                    </div>
+                    <div class="col-sm-2 py-1">
+                        <a href="/orderadmin/" class="btn btn-dark rounded-pill py-2 btn-block" style="font-size: 20px">
+                            Placed Order
+                        </a>
+                    </div>
+                    <div class="col-sm-2 py-1">
+                        <a href="/cancelorder/" class="btn btn-dark rounded-pill py-2 btn-block"
+                           style="font-size: 20px">
+                            Canceled Order
+                        </a>
+                    </div>
+                    <div class="col-sm-2 py-1">
+                        <a href="/returnorder/" class="btn btn-dark rounded-pill py-2 btn-block"
+                           style="font-size: 20px">
+                            Return Request
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-12 p-3 bg-white rounded shadow-sm mb-8">
+                    <!-- Shopping cart table -->
+
+                    <div class="table-responsive">
+                        <table class="table ">
+                            <thead style="white-space: nowrap">
+                            <tr>
+                                <th scope="col" class="border-0 bg-light">
+                                    <div class="p-2 px-2 text-uppercase">Product</div>
+                                </th>
+                                <th scope="col" class="border-0 bg-light">
+                                    <div class="py-2 text-uppercase">Price</div>
+                                </th>
+                                <th scope="col" class="border-0 bg-light">
+                                    <div class="py-2 px-3 text-uppercase">Add Size</div>
+                                </th>
+                                <th scope="col" class="border-0 bg-light">
+                                    <div class="py-2 px-3 text-uppercase">Available Size</div>
+                                </th>
+                                <th scope="col" class="border-0 bg-light">
+                                    <div class="py-2 px-3 text-uppercase">Edit</div>
+                                </th>
+                                <th scope="col" class="border-0 bg-light">
+                                    <div class="py-2 text-uppercase">Delete</div>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for i in Data %}
+                                <tr>
+                                    <th scope="row" class="border-0">
+                                        <div class="p-3">
+                                            <img src="{{ i.img1.url }}"
+                                                 alt="{{ i.id }}" width="10" class="rounded img-fluid shadow-sm">
+                                            <div class="ml-5 d-inline-block align-middle">
+                                                <h5 class="mb-0 px-3 "><a href="/productdetails/{{ i.id }}/"
+                                                                          class="text-dark  align-middle">
+                                                    {{ i.pid }}</a></h5>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <td class="border-0 align-middle"><strong>&#8377;{{ i.price }}</strong></td>
+                                    <td class="border-0 align-middle"><a href="/sizeadd/{{ i.id }}/"
+                                                                         class="btn btn-dark py-2 rounded-pill btn-block">Add</a>
+                                    </td>
+                                    <td class="border-0 align-middle"><a href="/sizeavailable/{{ i.pid }}/"
+                                                                         class="btn btn-dark py-2 rounded-pill btn-block">Size</a>
+                                    </td>
+                                    <td class="border-0 align-middle"><a href="/edit/{{ i.id }}/"
+                                                                         class="btn btn-dark py-2 rounded-pill btn-block">Edit</a>
+                                    </td>
+                                    <td class="border-0 align-middle"><a href="/delete/{{ i.id }}/"
+                                                                         class="btn btn-dark py-2 rounded-pill btn-block">Delete</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Main Content Wrapper End ##### -->
+{% endblock %}
+</html>

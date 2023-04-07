@@ -1,0 +1,189 @@
+{% extends 'index.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+{% block body %}
+    <!--
+        <div class="cart-table-area section-padding-100" style="margin-top:150px">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 col-lg-8">
+                        <div class="checkout_details_area mt-50 clearfix">
+
+                            <div class="alert alert-primary">
+                                <h2>Add Size</h2>
+                            </div>
+
+                            <form action="#" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="row">
+
+                                    <div class="col-md-12 mb-3">
+                                        <input type="text" class="form-control" name="id" value="{{Data.id}}">
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <input type="text" class="form-control" name="name" value="{{Data.name}}">
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <input type="text" class="form-control" name="description" value="{{Data.description}}">
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <select class="w-100" name="size">
+                                            {% for i in Siz %}
+                                        <option value={{i}}>{{i}}</option>
+                                            {% endfor %}
+                                    </select>
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <input type="number" class="form-control" name="basicPrice" value="{{Data.basicPrice}}">
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <input type="number" class="form-control mb-3" name="discount" value="{{Data.discount}}">
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <input type="text" class="form-control" name="color" value="{{Data.color}}">
+                                    </div>
+                                        <button type="submit" class="btn btn-info">SAVE</button>
+                                    </div>
+
+                            </form>
+                            {% if messages %}
+                                <div class="alert alert-success">
+                                {% for i in messages %}
+                                    {{i}}
+                                {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>-->
+    <!-- ##### Main Content Wrapper End ##### -->
+ <div class="container-fluid" style="margin-top: -18vh" onmouseover="setFocusToTextBox()">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 offset-1">
+                    <div class="addAdress">
+                        <form method="post" action="#" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h1 style="font-weight: 300">Add Size</h1>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="inputBox">
+                                        <div class="inputText">Product ID</div>
+                                        <input type="text" name="id" class="input" value="{{ Data.pid }}"   required>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="inputBox">
+                                        <div class="inputText">Product Name</div>
+                                        <input type="text" name="name" class="input" value="{{ Data.name }}" id="myText" ></div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                     <div class="inputBox">
+                                         <div class="inputText">Description</div>
+                                         <input type="text" name="description" class="input" value="{{ Data.description }}"  required>
+                                     </div>
+                                 </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="inputBox">
+                                    <select class="input" name="size">
+                                        {% for i in Siz %}
+                                            {% if i.sname != "all" %}
+                                                <option value="{{ i }}">{{ i }}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                    </div>
+                                </div>
+
+
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="inputBox">
+                                        <div class="inputText">Base Price</div>
+                                        <input type="text" name="basicPrice" value="{{ Data.basicPrice }}" class="input" required>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-sm-6">
+                                    <div class="inputBox">
+                                        <div class="inputText">Discount</div>
+                                        <input type="text" name="discount" value="{{ Data.discount }}" class="input" required>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <button type="submit" class="btn btn-dark rounded-pill py-2 btn-block" style="font-size: 20px">Save</button>
+                                </div>
+                                <div class="col-sm-6">
+                                     <a href="/adminpage/" class="btn btn-dark rounded-pill py-2 btn-block" style="font-size: 20px">Back To Admin</a>
+                                    </div>
+                            </div>
+                        </form>{% if messages %}
+                        <div class="row p-2">
+                            <div class="btn btn-dark rounded-pill py-2 btn-block">
+
+                            {% for i in messages %}
+                                {{ i }}
+                            {% endfor %}
+
+                        </div>
+                        </div>
+{% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+</html>
+<script type="text/javascript">
+$('input:text, input:password, textarea').focus(function()
+    {
+          var check = $(this).val();
+          if(check == '')
+          {
+                $(this).parent().addClass("focus");
+          }
+          else
+          {
+                $(this).parent().addClass("focus");
+          }
+    });
+
+
+	 	$(".input:text, input:password, textarea").focus(function() {
+	 		var empty=$(this).val();
+	 		if(empty == '')
+            {
+                $(this).parent().addClass("focus");
+            }
+	 	    else {
+	 	        $(this).parent().addClass("focus");
+            }
+	 	});
+
+
+ </script>

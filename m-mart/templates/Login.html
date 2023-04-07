@@ -1,0 +1,101 @@
+{% extends 'productdetails.html' %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}
+        <title>Login</title>
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+    <!--
+    <div class="wrapper" style="margin-top : 250px;">
+
+        <div class="container my-5">
+            <center><h1> Login </h1></center>
+            <form action=" " method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <label style="color:white">Username</label>
+                        <input type="text" name="usernam" class="form-control" required>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <label style="color:white">Password</label>
+                        <input type="password" style="background:#ccffff" class="form-control" name="passwrd"
+                               placeholder="Password" value="">
+                    </div>
+                    <div class="col-md-2 mb-6">
+                        <button type="submit" class="btn btn-success">Login</button>
+                    </div>
+                    <div class="col-md-2 mb-6">
+                        <a href="/signup/" class="btn btn-primary">Signup </a></center>
+                    </div>
+                </div>
+            </form>
+            {% if messages %}
+                <div class="alert alert-danger">
+                    {% for i in messages %}
+                        {{ i }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    -->
+
+
+        <div class="container-fluid">
+        <div class="row no-gutter">
+            <!-- The content half -->
+            <div class="col-sm-6 mx-auto bg-light">
+                <div class=" align-items-center py-5">
+
+                    <!-- Demo content-->
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-10 mx-auto">
+                                <h3 class="display-4 text-center">Login</h3>
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <div class="form-group mb-3">
+                                        <input type="text" placeholder="Username" name="usernam" required=""
+                                               autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <input type="password" placeholder="Password" name="passwrd" required=""
+                                               class="form-control rounded-pill border-0 shadow-sm px-4 text-primary">
+                                    </div>
+                                    <!--<div class="custom-control custom-checkbox mb-3">
+                                        <input id="customCheck1" type="checkbox" checked class="custom-control-input">
+                                        <label for="customCheck1" class="custom-control-label">Remember password</label>
+                                    </div>-->
+                                    <button type="submit"
+                                            class="btn btn-custom btn-block text-uppercase mb-2 rounded-pill shadow-sm"
+                                            style="width: 100%">Login
+                                    </button>
+                                    <div class="text-center d-flex justify-content-between mt-4"><a href="/signup/"
+                                                                                                    class="font-italic text-muted">
+                                        Create an account</a></div>
+                                </form>
+                                {% if messages %}
+                                    <div class="alert alert-danger">
+                                        {% for i in messages %}
+                                            {{ i }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div><!-- End -->
+
+                </div>
+            </div><!-- End -->
+
+        </div>
+    </div>
+{% endblock %}
+</body>
+</html>

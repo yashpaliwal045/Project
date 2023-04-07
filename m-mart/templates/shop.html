@@ -1,0 +1,89 @@
+{% extends 'index.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}<title>Product</title>{% endblock %}
+</head>
+<body>
+{% block body %}
+    <!-- The flexible grid (content) -->
+
+    <div class="container-fluid">
+        <ul class="sidenav">
+            <li><h3><strong>Shop By : </strong></h3></li>
+            <li><h5 style="padding-left: 6px"><u>Categories</u></h5></li>
+            {% for i in Cat %}
+                <li><a href="/shop/{{ i.cname }}/">{{ i.cname }}</a></li>
+            {% endfor %}
+            <li><h5 style="padding-left: 6px"><u>Size</u></h5></li>
+            {% for i in Siz %}
+                    {% if i.sname != "all" %}
+                        <li><a href="/shop2/{{ i.sname }}/">
+                            {{ i.sname }}</a></li>
+                    {% endif %}
+                {% endfor %}
+        </ul>
+    </div>
+
+    <div style="margin-left:18%;">
+    <h2>{{ No }}</h2>
+        <!-- The flexible grid (content) -->
+        <div class="container-fluid">
+            <div class="row">
+                {% for i in posts %}
+
+                    <div class="col-lg-3 col-md-4 col-sm-6  d-flex ">
+                        <div class="card-deck" style="padding-bottom: 2%">
+                            <div class="card ">
+                                <a href="/productdetails/{{ i.id }}">
+                                <img src="{{ i.img1.url }}" class="card-img-top img-fluid" style="height: 320px;width: 300px;" alt="{{ i.name }}">
+                                <div class="card-body">
+                                    <h5 class="card-title ctm-color" style="height: 100%;color: black">{{ i.name }}</h5>
+                                </div></a>
+                                <div class="card-footer">
+                                    <small><b>&#8377; {{ i.price }}</b></small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid mb-10 " style="margin-top: 5vh">
+        <div class="row`">
+            <div class="col-xs-12">
+                {% if posts.has_other_pages %}
+                    <ul class="pagination justify-content-sm-center">
+                        {% if posts.has_previous %}
+                            <li class="page-item"><a class="page-link" href="?page={{ posts.previous_page_number }}">&laquo;</a>
+                            </li>
+                        {% else %}
+                            <li class="disabled page-item"><a class="page-link"> <span>First</span></a></li>
+                        {% endif %}
+                        {% for i in posts.paginator.page_range %}
+                            {% if posts.number == i %}
+                                <li class="active page-item"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span>
+                                </li>
+                            {% else %}
+                                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                        {% if posts.has_next %}
+                            <li class="page-item"><a class="page-link"
+                                                     href="?page={{ posts.next_page_number }}">&raquo;</a></li>
+                        {% else %}
+                            <li class="disabled page-item"><span><a class="page-link">Last</a> </span></li>
+                        {% endif %}
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+</body>
+</html>

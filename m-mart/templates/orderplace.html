@@ -1,0 +1,179 @@
+{% extends 'index.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block title %}
+        <title>Order Placed</title>
+    {% endblock %}
+</head>
+{% block navbar %}
+<nav class="navbar navbar-expand-md fixed-top navbar-default">
+        <div class="container">
+            <a class="navbar-brand" href="/homedelete/" style="background-color: transparent">
+                <img src="{% static 'ico/icon.jpeg' %}" alt="Paliwal Automobiles" style="height: 50px; width: 50px" class="img-fluid">
+            </a>
+            <button class="navbar-toggler ml-auto custom-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+
+                <ul class="navbar-nav ml-auto custom-text">
+                    <li class="nav-item "><a class="nav-link" href="/homedelete/">Home</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle " id="dropdownMenuButton" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false" href="#">Product</a>
+                        <div class="dropdown-menu dropdown-content dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+
+                            <a  class="dropdown-item" href="/deleteshop/">All Product</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/deleteabout/">About Us</a>
+                    </li>
+                <li class="nav-item">{% if user.is_superuser %}
+                                <a class="nav-link" href="/deleteadminpage/">Admin Panel</a>
+                            {% endif %}</li>
+                    <li class="nav-item dropdown ">
+                        <a class="nav-link dropdown-toggle " id="dropdownMenuButton" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false" href="#">Profile</a>
+                        <div class="dropdown-menu dropdown-content dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+
+                            {% if request.user.is_authenticated %}
+                                <p style="text-transform: capitalize;border-bottom: 1px solid" class="offset-1"> hello {{ request.user.username }} !</p>
+                            {% endif %}
+
+
+                            {% if request.user.is_authenticated %}
+                                <a class="dropdown-item" href="/deletepastorder/">Order placed</a>
+                            {% endif %}
+                            {% if request.user.is_authenticated %}
+                                <a class="dropdown-item" href="/deletePreviousorders/">Previous Order</a>
+                            {% endif %}
+                            {% if request.user.is_authenticated %}
+                                <a class="dropdown-item" href="/deletelogout/">Logout</a>
+                            {% endif %}
+                        </div>
+                    </li>
+
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/deletecart/"><span class="fa fa-shopping-cart"></span></a>
+                        </li>
+                    {% endif %}
+
+
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+{% block body %}
+    <div class="container" style="margin-top: -18vh">
+     <div class="container">
+        <div class="row">
+            <div class="col-lg-10 offset-1">
+                <div class="addAdress">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h1 style="font-weight: 300">Order Placed</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body p-0">
+                        <div class="row p-5">
+                            <div class="col-md-3 px-2">
+                                <img src="{% static 'images/logo.jpg' %}" >
+                            </div>
+
+                            <div class="col-md-9 text-right">
+                                <p class="font-weight-bold mb-1">Invoice #552</p>
+                                <p class="text-muted">Due to: {{date}}</p>
+                            </div>
+                        </div>
+
+                        <hr class="my-5">
+
+                        <div class="row pb-5 p-5">
+                            <div class="col-md-6">
+                                {% for i in Adata %}
+                                <p class="font-weight-bold mb-4">Client Information</p>
+                                <p class="mb-1">{{i.chname}}</p>
+                                <p class="mb-1">{{i.address}}, {{city}}</p>
+                                <p class="mb-1">{{i.state}}</p>
+                                <p class="mb-1">{{i.pin}}</p>
+                                {% endfor %}
+                            </div>
+
+                            <div class="col-md-6 text-right">
+                                <p class="font-weight-bold mb-4">Payment Details</p>
+                                <p class="mb-1"><span class="text-muted">VAT: </span> 1425782</p>
+                                <p class="mb-1"><span class="text-muted">VAT ID: </span> 10253642</p>
+                                <p class="mb-1"><span class="text-muted">Payment Type: </span> Cash</p>
+                                <p class="mb-1"><span class="text-muted">Name: </span> Mr. Piyush Malhotra</p>
+                            </div>
+                        </div>
+
+                        <div class="row p-5">
+                            <div class="col-md-12">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th class="border-0 text-uppercase small font-weight-bold">ID</th>
+                                        <th class="border-0 text-uppercase small font-weight-bold">Item</th>
+                                        <th class="border-0 text-uppercase small font-weight-bold">Quantity</th>
+                                        <th class="border-0 text-uppercase small font-weight-bold">Basic Price</th>
+                                        <th class="border-0 text-uppercase small font-weight-bold">Discount</th>
+                                        <th class="border-0 text-uppercase small font-weight-bold">Final Price</th>
+                                        <th class="border-0 text-uppercase small font-weight-bold">Total</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for i in Data %}
+                                    <tr>
+                                        <td>{{i.cart_product.id}}</td>
+                                        <td>{{i.cart_product.name}}</td>
+                                        <td>{{i.count}}</td>
+                                        <td> &#8377 {{i.cart_product.basicPrice}}</td>
+                                        <td>{{i.cart_product.discount}}%</td>
+                                        <td> &#8377 {{i.cart_product.price}}</td>
+                                        <td> &#8377 {{i.total}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-row-reverse bg-dark text-white p-4">
+                            <div class="py-3 px-5 text-right">
+                                <div class="mb-2">Grand Total</div>
+                                <div class="h2 font-weight-light"> &#8377 {{total}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="view-product">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-xs-12">
+                    <h5 class="heading"><span><a href="/homedelete/">Back To Home</a></span></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Main Content Wrapper End ##### -->
+
+{% endblock body %}
+</html>
